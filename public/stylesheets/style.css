@@ -1,0 +1,38 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+#title{
+  background-color:aqua;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#ulinfo{
+  border: 2px solid red;
+  display: flex;
+  
+}
+#key{
+  display: flexbox;
+  color:blueviolet;
+  float: left;
+  flex-wrap: wrap;
+  margin-left:0px;
+
+}
+#value{
+  margin-right: 0px;
+  /* display: flexbox; */
+  /* display:flex; */
+  color:chartreuse;
+  float: right;
+}
+#keyli{
+  display: block;
+}
+#valueli{
+  display: block;
+}

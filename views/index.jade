@@ -1,0 +1,430 @@
+doctype html(lang='en')
+head
+    meta(charset='utf-8')
+    | &#x9;
+    link(rel='icon', type='image/png', href='/images/favicon.ico')
+    | &#x9;
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    | &#x9;
+    title Light Bootstrap Dashboard by Creative Tim
+    | &#x9;
+    meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0', name='viewport')
+    |     
+    meta(name='viewport', content='width=device-width')
+    // Bootstrap core CSS
+    link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    // Animation library for notifications
+    link(href='/stylesheets/animate.min.css', rel='stylesheet')
+    // Light Bootstrap Table core CSS
+    link(href='/stylesheets/light-bootstrap-dashboard.css?v=1.4.0', rel='stylesheet')
+    // CSS for Demo Purpose, don't include it in your project
+    link(href='/stylesheets/demo.css', rel='stylesheet')
+    // Fonts and icons
+    link(href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
+    |     
+    link(href='http://fonts.googleapis.com/css?family=Roboto:400,700,300', rel='stylesheet', type='text/css')
+    |     
+    link(href='/stylesheets/pe-icon-7-stroke.css', rel='stylesheet')
+  body
+    .wrapper
+      .sidebar(data-color='purple', data-image='/images/sidebar-5.png')
+        //
+          Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+          Tip 2: you can also add an image using data-image tag
+        .sidebar-wrapper
+          .logo
+            a.simple-text(href='http://www.creative-tim.com')
+              | Important Project
+          |             
+          ul.nav
+            li.active
+              a(href='/')
+                i.pe-7s-graph
+                |                         
+                p Dashboard
+            |                 
+            li
+              a(href='user.html')
+                i.pe-7s-user
+                |                         
+                p User Profile
+            |                 
+            li
+              a(href='/tables')
+                i.pe-7s-note2
+                |                         
+                p Table List
+            |                 
+            li
+              a(href='typography.html')
+                i.pe-7s-news-paper
+                |                         
+                p Typography
+            |                 
+            li
+              a(href='icons.html')
+                i.pe-7s-science
+                |                         
+                p Icons
+            |                 
+            li
+              a(href='maps.html')
+                i.pe-7s-map-marker
+                |                         
+                p Maps
+            |                 
+            li
+              a(href='notifications.html')
+                i.pe-7s-bell
+                |                         
+                p Notifications
+            | &#x9;&#x9;&#x9;&#x9;
+            li.active-pro
+              a(href='upgrade.html')
+                i.pe-7s-rocket
+                |                         
+                p Upgrade to PRO
+      |     
+      .main-panel
+        nav.navbar.navbar-default.navbar-fixed
+          .container-fluid
+            .navbar-header
+              button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navigation-example-2')
+                span.sr-only Toggle navigation
+                |                         
+                span.icon-bar
+                |                         
+                span.icon-bar
+                |                         
+                span.icon-bar
+              |                     
+              a.navbar-brand(href='#') Dashboard
+            |                 
+            .collapse.navbar-collapse
+              ul.nav.navbar-nav.navbar-left
+                li
+                  a.dropdown-toggle(href='#', data-toggle='dropdown')
+                    i.fa.fa-dashboard
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                    p.hidden-lg.hidden-md Dashboard
+                |                         
+                li.dropdown
+                  a.dropdown-toggle(href='#', data-toggle='dropdown')
+                    i.fa.fa-globe
+                    |                                     
+                    b.caret.hidden-lg.hidden-md
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                    p.hidden-lg.hidden-md
+                      | 5 Notifications
+                      b.caret
+                  |                               
+                  ul.dropdown-menu
+                    li
+                      a(href='#') Notification 1
+                    |                                 
+                    li
+                      a(href='#') Notification 2
+                    |                                 
+                    li
+                      a(href='#') Notification 3
+                    |                                 
+                    li
+                      a(href='#') Notification 4
+                    |                                 
+                    li
+                      a(href='#') Another notification
+                |                         
+                li
+                  a(href='')
+                    i.fa.fa-search
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                    p.hidden-lg.hidden-md Search
+              |                     
+              ul.nav.navbar-nav.navbar-right
+                li
+                  a(href='')
+                    p Account
+                |                         
+                li.dropdown
+                  a.dropdown-toggle(href='#', data-toggle='dropdown')
+                    p
+                      | Dropdown
+                      b.caret
+                  |                               
+                  ul.dropdown-menu
+                    li
+                      a(href='#') Action
+                    |                                 
+                    li
+                      a(href='#') Another action
+                    |                                 
+                    li
+                      a(href='#') Something
+                    |                                 
+                    li
+                      a(href='#') Another action
+                    |                                 
+                    li
+                      a(href='#') Something
+                    |                                 
+                    li.divider
+                    |                                 
+                    li
+                      a(href='#') Separated link
+                |                         
+                li
+                  a(href='#')
+                    p Log out
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                li.separator.hidden-lg
+        |         
+        .content
+          .container-fluid
+            .row
+              .col-md-4
+                .card
+                  .header
+                    h4.title Email Statistics
+                    |                                 
+                    p.category Last Campaign Performance
+                  |                             
+                  .content
+                    #chartPreferences.ct-chart.ct-perfect-fourth
+                    |                                 
+                    .footer
+                      .legend
+                        i.fa.fa-circle.text-info
+                        |  Open
+                        |                                         
+                        i.fa.fa-circle.text-danger
+                        |  Bounce
+                        |                                         
+                        i.fa.fa-circle.text-warning
+                        |  Unsubscribe
+                      |                                     
+                      hr
+                      |                                     
+                      .stats
+                        i.fa.fa-clock-o
+                        |  Campaign sent 2 days ago
+              |                     
+              .col-md-8
+                .card
+                  .header
+                    h4.title Users Behavior
+                    |                                 
+                    p.category 24 Hours performance
+                  |                             
+                  .content
+                    #chartHours.ct-chart
+                    |                                 
+                    .footer
+                      .legend
+                        i.fa.fa-circle.text-info
+                        |  Open
+                        |                                         
+                        i.fa.fa-circle.text-danger
+                        |  Click
+                        |                                         
+                        i.fa.fa-circle.text-warning
+                        |  Click Second Time
+                      |                                     
+                      hr
+                      |                                     
+                      .stats
+                        i.fa.fa-history
+                        |  Updated 3 minutes ago
+            |                 
+            .row
+              .col-md-6
+                .card
+                  .header
+                    h4.title 2014 Sales
+                    |                                 
+                    p.category All products including Taxes
+                  |                             
+                  .content
+                    #chartActivity.ct-chart
+                    |                                 
+                    .footer
+                      .legend
+                        i.fa.fa-circle.text-info
+                        |  Tesla Model S
+                        |                                         
+                        i.fa.fa-circle.text-danger
+                        |  BMW 5 Series
+                      |                                     
+                      hr
+                      |                                     
+                      .stats
+                        i.fa.fa-check
+                        |  Data information certified
+              |                     
+              .col-md-6
+                .card
+                  .header
+                    h4.title Tasks
+                    |                                 
+                    p.category Backend development
+                  |                             
+                  .content
+                    .table-full-width
+                      table.table
+                        tbody
+                          tr
+                            td
+                              .checkbox
+                                input#checkbox1(type='checkbox')
+                                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  &#x9;
+                                label(for='checkbox1')
+                            |                                                 
+                            td Sign contract for &quot;What are conference organizers afraid of?&quot;
+                            |                                                 
+                            td.td-actions.text-right
+                              button.btn.btn-info.btn-simple.btn-xs(type='button', rel='tooltip', title='Edit Task')
+                                i.fa.fa-edit
+                              |                                                     
+                              button.btn.btn-danger.btn-simple.btn-xs(type='button', rel='tooltip', title='Remove')
+                                i.fa.fa-times
+                          |                                             
+                          tr
+                            td
+                              .checkbox
+                                input#checkbox2(type='checkbox', checked='')
+                                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  &#x9;
+                                label(for='checkbox2')
+                            |                                                 
+                            td Lines From Great Russian Literature? Or E-mails From My Boss?
+                            |                                                 
+                            td.td-actions.text-right
+                              button.btn.btn-info.btn-simple.btn-xs(type='button', rel='tooltip', title='Edit Task')
+                                i.fa.fa-edit
+                              |                                                     
+                              button.btn.btn-danger.btn-simple.btn-xs(type='button', rel='tooltip', title='Remove')
+                                i.fa.fa-times
+                          |                                             
+                          tr
+                            td
+                              .checkbox
+                                input#checkbox3(type='checkbox')
+                                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  &#x9;
+                                label(for='checkbox3')
+                            |                                                 
+                            td
+                              | Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                            |                                                 
+                            td.td-actions.text-right
+                              button.btn.btn-info.btn-simple.btn-xs(type='button', rel='tooltip', title='Edit Task')
+                                i.fa.fa-edit
+                              |                                                     
+                              button.btn.btn-danger.btn-simple.btn-xs(type='button', rel='tooltip', title='Remove')
+                                i.fa.fa-times
+                          |                                             
+                          tr
+                            td
+                              .checkbox
+                                input#checkbox4(type='checkbox', checked='')
+                                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  &#x9;
+                                label(for='checkbox4')
+                            |                                                 
+                            td Create 4 Invisible User Experiences you Never Knew About
+                            |                                                 
+                            td.td-actions.text-right
+                              button.btn.btn-info.btn-simple.btn-xs(type='button', rel='tooltip', title='Edit Task')
+                                i.fa.fa-edit
+                              |                                                     
+                              button.btn.btn-danger.btn-simple.btn-xs(type='button', rel='tooltip', title='Remove')
+                                i.fa.fa-times
+                          |                                             
+                          tr
+                            td
+                              .checkbox
+                                input#checkbox5(type='checkbox')
+                                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  &#x9;
+                                label(for='checkbox5')
+                            |                                                 
+                            td Read &quot;Following makes Medium better&quot;
+                            |                                                 
+                            td.td-actions.text-right
+                              button.btn.btn-info.btn-simple.btn-xs(type='button', rel='tooltip', title='Edit Task')
+                                i.fa.fa-edit
+                              |                                                     
+                              button.btn.btn-danger.btn-simple.btn-xs(type='button', rel='tooltip', title='Remove')
+                                i.fa.fa-times
+                          |                                             
+                          tr
+                            td
+                              .checkbox
+                                input#checkbox6(type='checkbox', checked='')
+                                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  &#x9;
+                                label(for='checkbox6')
+                            |                                                 
+                            td Unfollow 5 enemies from twitter
+                            |                                                 
+                            td.td-actions.text-right
+                              button.btn.btn-info.btn-simple.btn-xs(type='button', rel='tooltip', title='Edit Task')
+                                i.fa.fa-edit
+                              |                                                     
+                              button.btn.btn-danger.btn-simple.btn-xs(type='button', rel='tooltip', title='Remove')
+                                i.fa.fa-times
+                    |                                 
+                    .footer
+                      hr
+                      |                                     
+                      .stats
+                        i.fa.fa-history
+                        |  Updated 3 minutes ago
+        |         
+        footer.footer
+          .container-fluid
+            nav.pull-left
+              ul
+                li
+                  a(href='#')
+                    | Home
+                |                         
+                li
+                  a(href='#')
+                    | Company
+                |                         
+                li
+                  a(href='#')
+                    | Portfolio
+                |                         
+                li
+                  a(href='#')
+                    | Blog
+            |                 
+            p.copyright.pull-right
+              | &copy; 
+              script.
+                document.write(new Date().getFullYear())
+              |  
+              a(href='http://www.creative-tim.com') Creative Tim
+              | , made with love for a better web
+  // Core JS Files
+  script(src='/javascripts/jquery.3.2.1.min.js', type='text/javascript')
+  | &#x9;
+  script(src='/javascripts/bootstrap.min.js', type='text/javascript')
+  // Charts Plugin
+  script(src='/javascripts/chartist.min.js')
+  // Notifications Plugin
+  script(src='/javascripts/bootstrap-notify.js')
+  // Google Maps Plugin
+  script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE')
+  // Light Bootstrap Table Core javascript and methods for Demo purpose
+  script(src='/javascripts/light-bootstrap-dashboard.js?v=1.4.0')
+  // Light Bootstrap Table DEMO methods, don't include it in your project!
+  script(src='/javascripts/demo.js')
+  | &#x9;
+  script(type='text/javascript').
+    $(document).ready(function(){
+    demo.initChartist();
+    $.notify({
+    icon: 'pe-7s-gift',
+    message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
+    },{
+    type: 'info',
+    timer: 4000
+    });
+    });
