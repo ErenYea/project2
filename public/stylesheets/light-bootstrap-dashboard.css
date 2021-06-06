@@ -2284,6 +2284,7 @@ fieldset[disabled] .btn-neutral.active {
 }
 
 .card .title {
+    text-transform:capitalize;
     margin: 0;
     color: #333333;
     font-weight: 300;

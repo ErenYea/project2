@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 const mysql = require("mysql");
 
@@ -10,49 +10,52 @@ var mysqlConnection = mysql.createConnection({
   multipleStatements: true,
 });
 mysqlConnection.connect((err) => {
-    if (err) {
-      console.log("Not seccess", err);
-    } else {
-      console.log("sucess");
-    }
-  });
-// const mysqlConnection = require('./mysql');
-var tablenames = []
-
-mysqlConnection.query("show tables",(err,rows,fields)=>{
-  if(err){
-    console.log(err)
-  } else{
-    for (element of rows) {
-      for (key in element){
-        tablenames.push(element[key])
-      }
-    };
+  if (err) {
+    console.log("Not seccess", err);
+  } else {
+    console.log("sucess");
   }
-  console.log(tablenames)
-})
+});
 
-var data;
-var second;
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  
-  mysqlConnection.query("SELECT * from dependent", (err, rows, fields) => {
-    if (err) {
-      console.log("pagama", err);
-    } else {
-      // res.send(rows)
-      data = rows;
+var tablenames = [];
+var data = [];
+mysqlConnection.query("show tables", (err, rows, fields) => {
+  if (err) {
+    console.log(err);
+  } else {
+    for (element of rows) {
+      for (key in element) {
+        tablenames.push(element[key]);
+        // tcb = element[key];
+        // console.log(element[key]);
+        mysqlConnection.query(
+          `SELECT * from ${element[key]}`,
+          (err, rows, fields) => {
+            if (err) {
+              console.log("pagama", err);
+            } else {
+              // console.log(tcb);
+              // res.send(rows)
+              // res.send(rows)
+              data.push(rows);
+            }
+          }
+        );
+      }
     }
+  }
+
+  /* GET users listing. */
+  router.get("/", function (req, res, next) {
+    res.render("tables", {
+      title: "Express",
+      data: data,
+      tablenames: tablenames,
+    });
   });
-  mysqlConnection.query("SELECT * from employee",(err,rows, fields)=>{
-    if (err){
-      console.log("Error",err)
-    } else{
-      second = rows;
-    }
-  })
-  res.render("tables", { title: "Express", data: data, second:second });
+
+  // res.send(data)
+
   // res.render('tables')
   // res.send('respond with a resource');
 });

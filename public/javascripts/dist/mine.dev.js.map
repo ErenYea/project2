@@ -1,0 +1,1 @@
+{"version":3,"sources":["mine.js"],"names":["$","click"],"mappings":";;AAAAA,CAAC,CAAC,MAAD,CAAD,CAAUC,KAAV,CAAgB,YAAI,CAEnB,CAFD","sourcesContent":["$(\"#add\").click(()=>{\r\n    \r\n})"],"file":"mine.dev.js"}

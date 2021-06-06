@@ -1,6 +1,6 @@
 "use strict";
 
-var express = require('express');
+var express = require("express");
 
 var router = express.Router();
 
@@ -19,9 +19,9 @@ mysqlConnection.connect(function (err) {
   } else {
     console.log("sucess");
   }
-}); // const mysqlConnection = require('./mysql');
-
+});
 var tablenames = [];
+var data = [];
 mysqlConnection.query("show tables", function (err, rows, fields) {
   if (err) {
     console.log(err);
@@ -35,7 +35,19 @@ mysqlConnection.query("show tables", function (err, rows, fields) {
         element = _step.value;
 
         for (key in element) {
-          tablenames.push(element[key]);
+          tablenames.push(element[key]); // tcb = element[key];
+          // console.log(element[key]);
+
+          mysqlConnection.query("SELECT * from ".concat(element[key]), function (err, rows, fields) {
+            if (err) {
+              console.log("pagama", err);
+            } else {
+              // console.log(tcb);
+              // res.send(rows)
+              // res.send(rows)
+              data.push(rows);
+            }
+          });
         }
       }
     } catch (err) {
@@ -52,37 +64,18 @@ mysqlConnection.query("show tables", function (err, rows, fields) {
         }
       }
     }
-
-    ;
   }
+  /* GET users listing. */
 
-  console.log(tablenames);
-});
-var data;
-var second;
-/* GET users listing. */
 
-router.get('/', function (req, res, next) {
-  mysqlConnection.query("SELECT * from dependent", function (err, rows, fields) {
-    if (err) {
-      console.log("pagama", err);
-    } else {
-      // res.send(rows)
-      data = rows;
-    }
-  });
-  mysqlConnection.query("SELECT * from employee", function (err, rows, fields) {
-    if (err) {
-      console.log("Error", err);
-    } else {
-      second = rows;
-    }
-  });
-  res.render("tables", {
-    title: "Express",
-    data: data,
-    second: second
-  }); // res.render('tables')
+  router.get("/", function (req, res, next) {
+    res.render("tables", {
+      title: "Express",
+      data: data,
+      tablenames: tablenames
+    });
+  }); // res.send(data)
+  // res.render('tables')
   // res.send('respond with a resource');
 });
 module.exports = router;
