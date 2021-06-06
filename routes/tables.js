@@ -17,11 +17,26 @@ mysqlConnection.connect((err) => {
     }
   });
 // const mysqlConnection = require('./mysql');
+var tablenames = []
+
+mysqlConnection.query("show tables",(err,rows,fields)=>{
+  if(err){
+    console.log(err)
+  } else{
+    for (element of rows) {
+      for (key in element){
+        tablenames.push(element[key])
+      }
+    };
+  }
+  console.log(tablenames)
+})
 
 var data;
 var second;
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+  
   mysqlConnection.query("SELECT * from dependent", (err, rows, fields) => {
     if (err) {
       console.log("pagama", err);
