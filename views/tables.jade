@@ -27,6 +27,8 @@ head
     link(href='/stylesheets/pe-icon-7-stroke.css', rel='stylesheet')
     link(rel='canonical', href='https://getbootstrap.com/docs/4.0/components/buttons/')
     link(rel="stylesheet", href="/stylesheets/style.css")
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+
   body
     .wrapper
       .sidebar(data-color='purple', data-image='/images/sidebar-5.jpg')
@@ -167,33 +169,35 @@ head
         |         
         .content
           - i=0
-          each val in data
-            .container-fluid
-              .row
-                .col-md-12
-                  .card
-                    .header
-                      h4.title #{tablenames[i]}
-                        button#add.btn.btn-primary(type='button') ADD A ROW
-                      - i +=1
-                      |                                 
-                      p.category Here is a subtitle for this table
-                    |                             
-                    .content.table-responsive.table-full-width
+          form(method="POST" action="/add")
+            each val in data
+              .container-fluid
+                .row
+                  .col-md-12
+                    .card
+                      .header
                       
-                      table.table.table-hover.table-striped
-                        thead
-                          each vals,key in val[0]
-                              th #{key}         &#x9;    
-                                  
-                              
-                        |                                     
-                        tbody
-                          each item in val
-                            tr 
-                              each vals,key in item 
-                                td #{vals}        &#x9;
-                    
+                        h4.title #{tablenames[i]}
+                          <input class="btn btn-primary" type="submit" id="#{tablenames[i]}" name="#{tablenames[i]}" value="ADD">
+                        - i +=1
+                        |                                 
+                        p.category Here is a subtitle for this table
+                      |                             
+                      .content.table-responsive.table-full-width
+                        
+                        table.table.table-hover.table-striped
+                          thead
+                            each vals,key in val[0]
+                                th #{key}         &#x9;    
+                                    
+                                
+                          |                                     
+                          tbody
+                            each item in val
+                              tr 
+                                each vals,key in item 
+                                  td #{vals}        &#x9;
+                  
                                                 
         |         
         footer.footer
