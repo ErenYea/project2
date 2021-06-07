@@ -13,22 +13,28 @@ head
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js')
   body
     .container
-      h2 Vertical (basic) form
+      h2 Add a New Entery to #{tablename}
       |   
-      form(action='/action_page.php')
-        .form-group
-          label(for='email') Email:
-          |       
-          input#email.form-control(type='email', placeholder='Enter email', name='email')
-        |     
-        .form-group
-          label(for='pwd') Password:
-          |       
-          input#pwd.form-control(type='password', placeholder='Enter password', name='pwd')
+      form(action='/action' method="POST")
+        input(type='text' name='tablename' value='#{tablename}' style='display:none;')
+        each val in data
+            .form-group
+            label(for='#{val.DATA_TYPE}') #{val.COLUMN_NAME}:
+            |  
+            if((val.IS_NULLABLE=='NO') && (val.DATA_TYPE=='int'))
+                input.form-control(type='number', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}' required)
+            else if(val.DATA_TYPE=='int')
+                input.form-control(type='number', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}')
+            else
+                input.form-control(type='#{val.DATA_TYPE}', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}')
+                 
+            
+            |  
+            
+               
+            
         |     
         .checkbox
-          label
-            input(type='checkbox', name='remember')
-            |  Remember me
+          
         |     
-        button.btn.btn-default(type='submit') Submit
+        button.btn.btn-default.btn-primary(type='submit') Submit

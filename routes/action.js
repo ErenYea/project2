@@ -17,26 +17,21 @@ mysqlConnection.connect((err) => {
 });
 
 router.post("/", function (req, res,next) {
-  console.log("added")
-  var ob = req.body
-  var name;
-  for(key in ob){
-    name=key
-  }
-  mysqlConnection.query(`select COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH,  
-       IS_NULLABLE 
-from INFORMATION_SCHEMA.COLUMNS
-where TABLE_NAME='${name}'`,(err,rows,fields)=>{
-  if(err){
-    res.send(err)
-  }else{
-    // console.log(rows)
-    res.render("add",{data:rows,tablename:name});
-    // res.send(rows)
-  }
-  
-})
-  
+    var data = req.body
+    var arr = []
+    for(key in data){
+        arr.push(data[key])
+    }
+    var tablename = arr.shift()
+    // mysqlConnection.query(`insert into ${tablename} 
+    // values (${arr.toString()})`,(err,rows,fields)=>{
+    //     if(err){
+    //         res.send(err)
+    //     } else{
+    //         res.redirect('/tables')
+    //     }
+    // })
+    res.send(data) 
     
 });
 

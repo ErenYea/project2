@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var dashboardrouter = require('./routes/tables')
 var add = require('./routes/add')
+var action = require('./routes/action')
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/tables',dashboardrouter)
 app.use('/add',add)
+app.use('/action',action)
 
 
 
