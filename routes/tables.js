@@ -17,51 +17,75 @@ mysqlConnection.connect((err) => {
   }
 });
 
-var tablenames = [];
-var data = [];
-mysqlConnection.query("show tables", (err, rows, fields) => {
-  if (err) {
-    console.log(err);
-  } else {
-    if (data.length != 0) {
-      data = [];
-      tablenames = [];
-    }
-    for (element of rows) {
-      for (key in element) {
-        tablenames.push(element[key]);
-        // tcb = element[key];
-        // console.log(element[key]);
-        mysqlConnection.query(
-          `SELECT * from ${element[key]}`,
-          (err, rows, fields) => {
-            if (err) {
-              console.log("pagama", err);
-            } else {
-              // console.log(tcb);
-              // res.send(rows)
-              // res.send(rows)
-              data.push(rows);
-            }
-          }
-        );
-      }
-    }
-  }
+
+
+
+
 
   /* GET users listing. */
-  router.get("/", function (req, res, next) {
-    res.render("tables", {
-      title: "Express",
-      data: data,
-      tablenames: tablenames,
+router.get("/", function (req, res, next) {
+  const gettablenames = () =>{
+  return new Promise((resolve,reject)=>{
+    mysqlConnection.query("show tables",(err,rows,fields)=>{
+        if (err){
+          console.log("First Function",err)
+          reject(err);
+        } else{
+          resolve(rows);
+        }
+      });
     });
-  });
+  };
 
-  // res.send(data)
-
-  // res.render('tables')
-  // res.send('respond with a resource');
+  const getcolumndata = (element,key) =>{
+    return new Promise((resolve,reject)=>{
+      mysqlConnection.query(`SELECT * from ${element[key]}`,(err,rows,fields)=>{
+        if(err){
+          console.log("Second function",err)
+          reject(err);
+        } else{
+          resolve(rows);
+        }
+      });
+    });
+  };
+  const allfunct = async () => {
+    var tablenames = [];
+    var data = [];
+    var array_of_table = await gettablenames();
+    console.log(array_of_table);
+    for (element of array_of_table){
+      for (key in element){
+        console.log(element[key]);
+        tablenames.push(element[key]);
+        var object_of_data = await getcolumndata(element,key);
+        data.push(object_of_data);
+      }
+    }
+    // console.log(data)
+    console.log(tablenames)
+    var newarr = [tablenames,data];
+    return newarr;
+  }
+  const start = async () => {
+    var newarr = await allfunct()
+    var tablenames = newarr[0]
+    var data = newarr[1]
+    console.log(tablenames);
+    res.render("tables", {
+        title: "Express",
+        data: data,
+        tablenames: tablenames,
+    });
+  }
+  start();
+  
+  
+  
+  
 });
+
+  
+
 
 module.exports = router;
