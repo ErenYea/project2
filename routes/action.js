@@ -23,15 +23,16 @@ router.post("/", function (req, res,next) {
         arr.push(data[key])
     }
     var tablename = arr.shift()
-    // mysqlConnection.query(`insert into ${tablename} 
-    // values (${arr.toString()})`,(err,rows,fields)=>{
-    //     if(err){
-    //         res.send(err)
-    //     } else{
-    //         res.redirect('/tables')
-    //     }
-    // })
-    res.send(data) 
+    var huz = "'" + arr.join("','") + "'"
+    mysqlConnection.query(`insert into ${tablename} 
+    values (${huz})`,(err,rows,fields)=>{
+        if(err){
+            res.send(err)
+        } else{
+            res.redirect('/tables')
+        }
+    })
+    // res.send(data) 
     
 });
 
