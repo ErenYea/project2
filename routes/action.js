@@ -5,7 +5,7 @@ var mysqlConnection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "loveisone",
-  database: "drstone",
+  database: "helloworld",
   multipleStatements: true,
 });
 mysqlConnection.connect((err) => {
@@ -16,23 +16,38 @@ mysqlConnection.connect((err) => {
   }
 });
 
+
 router.post("/", function (req, res,next) {
-    var data = req.body
-    var arr = []
-    for(key in data){
-        arr.push(data[key])
+    var data = req.body;
+    var arr = [];
+    var array_of_column_name=[];
+    function isNumeric(str) {
+      if (typeof str != "string") return false // we only process strings!  
+      return !isNaN(str)  
     }
-    var tablename = arr.shift()
-    var huz = "'" + arr.join("','") + "'"
-    mysqlConnection.query(`insert into ${tablename} 
-    values (${huz})`,(err,rows,fields)=>{
+
+    for(key in data){
+      if (isNumeric(data[key])){
+        var num = parseInt(data[key]);
+        arr.push(num);
+      } else{
+        arr.push(data[key]);
+      }
+      array_of_column_name.push(key)
+    }
+    var tablename = arr.shift();
+    array_of_column_name.shift();
+    // arr.reverse();
+    var huz = "'" + arr.join("','") + "'";
+    var ham = "" + array_of_column_name.join(",") + "";
+    mysqlConnection.query(`insert into ${tablename} (${ham}) values (${huz})`,(err,rows,fields)=>{
         if(err){
             res.send(err)
         } else{
             res.redirect('/tables')
         }
     })
-    // res.send(data) 
+    // res.send(ham) ;
     
 });
 

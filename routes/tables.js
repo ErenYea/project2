@@ -6,7 +6,7 @@ var mysqlConnection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "loveisone",
-  database: "drstone",
+  database: "helloworld",
   multipleStatements: true,
 });
 mysqlConnection.connect((err) => {
@@ -23,6 +23,10 @@ mysqlConnection.query("show tables", (err, rows, fields) => {
   if (err) {
     console.log(err);
   } else {
+    if (data.length != 0) {
+      data = [];
+      tablenames = [];
+    }
     for (element of rows) {
       for (key in element) {
         tablenames.push(element[key]);

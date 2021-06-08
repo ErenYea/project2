@@ -21,25 +21,22 @@ mysqlConnection.connect(function (err) {
   }
 });
 router.post("/", function (req, res, next) {
-  console.log("added");
-  var ob = req.body;
-  var name;
+  var data = req.body;
+  var arr = [];
 
-  for (key in ob) {
-    name = key;
+  for (key in data) {
+    arr.push(data[key]);
   }
 
-  mysqlConnection.query("select COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH,  \n       IS_NULLABLE \nfrom INFORMATION_SCHEMA.COLUMNS\nwhere TABLE_NAME='".concat(name, "'"), function (err, rows, fields) {
+  var tablename = arr.shift();
+  var huz = "'" + arr.join("','") + "'";
+  mysqlConnection.query("insert into ".concat(tablename, " \n    values (").concat(huz, ")"), function (err, rows, fields) {
     if (err) {
       res.send(err);
     } else {
-      // console.log(rows)
-      res.render("add", {
-        data: rows,
-        tablename: name
-      }); // res.send(rows)
+      res.redirect('/tables');
     }
-  });
+  }); // res.send(data) 
 });
 module.exports = router;
-//# sourceMappingURL=add.dev.js.map
+//# sourceMappingURL=action.dev.js.map

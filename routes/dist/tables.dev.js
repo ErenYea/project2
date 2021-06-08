@@ -10,7 +10,7 @@ var mysqlConnection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "loveisone",
-  database: "drstone",
+  database: "helloworld",
   multipleStatements: true
 });
 mysqlConnection.connect(function (err) {
@@ -26,6 +26,11 @@ mysqlConnection.query("show tables", function (err, rows, fields) {
   if (err) {
     console.log(err);
   } else {
+    if (data.length != 0) {
+      data = [];
+      tablenames = [];
+    }
+
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
     var _iteratorError = undefined;

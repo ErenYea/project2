@@ -23,16 +23,8 @@ var mysqlConnection = require('./mysqlconn'); // var mysqlConnection = mysql.cre
 
 
 router.get("/", function (req, res, next) {
-  mysqlConnection.query("SELECT * from dependent", function (err, rows, fields) {
-    if (err) {
-      console.log("pagama", err);
-    } else {
-      // res.send(rows)
-      res.render("index", {
-        title: "Express",
-        data: rows
-      });
-    }
+  res.render("index", {
+    title: "Express"
   });
 });
 module.exports = router;
