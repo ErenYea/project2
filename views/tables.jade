@@ -180,25 +180,56 @@ head
                       .header
                       
                         h4.title #{tablenames[i]}
-                          <input class="btn btn-primary" type="submit" id="#{tablenames[i]}" name="#{tablenames[i]}" value="ADD">
+                          -if(cond == 'table'){
+                            <input class="btn btn-primary" type="submit" id="#{tablenames[i]}" name="#{tablenames[i]}" value="VIEW">
+                            <input class="btn btn-primary" type="submit" id="#{tablenames[i]}" name="#{tablenames[i]}" value="ADD">
+                          -} else{
+                            <input class="btn btn-primary" type="submit" id="#{tablenames[i]}" name="#{tablenames[i]}" value="ADD">
+                          -}
+                          
                         - i +=1
                         |                                 
                         p.category Here is a subtitle for this table
                       |                             
                       .content.table-responsive.table-full-width
-                        
                         table.table.table-hover.table-striped.table-dark
                           thead
                             each vals,key in val[0]
-                                th #{key}         &#x9;    
-                                    
+                              th #{key}         &#x9;    
                                 
-                          |                                     
-                          tbody
-                            each item in val
-                              tr 
-                                each vals,key in item 
-                                  td #{vals}        &#x9;
+                                
+                          
+                          -if( cond =='table'){
+                              tbody
+                                - p = 0
+                                each item in val
+                                  -p+=1
+                                  -if(p === 5){
+                                    - break;
+                                  -}
+                                  tr 
+                                    each vals,key in item 
+                                    
+                                      td #{vals}        &#x9;
+                                    
+
+                          -}else{
+                              tbody
+                              
+                                each item in val
+                                  tr 
+                                    each vals,key in item 
+                                    
+                                      td #{vals}        &#x9;
+                                    td 
+                                      input.btn.btn-primary(type='submit' id='#{tablenames[i]}' name='#{tablenames[i]}' value='DELETE')
+                                      input.btn.btn-primary(type='submit' id='#{tablenames[i]}' name='#{tablenames[i]}' value='EDIT')
+                                      
+                          -}
+                            
+                                  
+                                  
+
                   
                                                 
         |         

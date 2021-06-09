@@ -53,17 +53,18 @@ router.get("/", function (req, res, next) {
     var tablenames = [];
     var data = [];
     var array_of_table = await gettablenames();
-    console.log(array_of_table);
+    // console.log(array_of_table);
     for (element of array_of_table){
       for (key in element){
         console.log(element[key]);
         tablenames.push(element[key]);
         var object_of_data = await getcolumndata(element,key);
         data.push(object_of_data);
+        
       }
     }
     // console.log(data)
-    console.log(tablenames)
+    // console.log(tablenames)
     var newarr = [tablenames,data];
     return newarr;
   }
@@ -71,11 +72,12 @@ router.get("/", function (req, res, next) {
     var newarr = await allfunct()
     var tablenames = newarr[0]
     var data = newarr[1]
-    console.log(tablenames);
+    // console.log(tablenames);
     res.render("tables", {
         title: "Express",
         data: data,
         tablenames: tablenames,
+        cond:"table"
     });
   }
   start();
