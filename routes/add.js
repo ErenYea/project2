@@ -28,6 +28,8 @@ router.post("/", function (req, res,next) {
     name=key
     value=ob[key]
   }
+  console.log(name)
+  console.log(value)
   if(value=="ADD"){
     mysqlConnection.query(`select COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH,  
        IS_NULLABLE 
@@ -37,12 +39,26 @@ router.post("/", function (req, res,next) {
       if(err){
         res.send(err)
       }else{
-        // console.log(rows)
-        res.render("add",{data:rows,tablename:name});
+        console.log(rows)
+        res.render("add",{data:rows,tablename:name,cond:'add'});
         // res.send(rows)
       }
     });
-  } else{
+  } else if(ob[Object.keys(ob)[0]]=='EDIT'){
+      mysqlConnection.query(`select COLUMN_NAME,DATA_TYPE,CHARACTER_MAXIMUM_LENGTH,IS_NULLABLE
+      from INFORMATION_SCHEMA.COLUMNS
+      where TABLE_NAME='${ob.tablename}'`,(err,rows,fields)=>{
+        var main=rows;
+        console.log(rows)
+        mysqlConnection.query(`select * from ${ob.tablename} where ${value[0]}=${Object.keys(ob)[0]}`,(err,rows,fields)=>{
+          // console.log(`select * from ${ob.tablename} where ${value[0]}=${Object.keys(ob)[0]}`)
+          console.log(rows)
+          res.render("add",{data:main,rows:rows,tablename:ob.tablename,cond:'edit'})
+          // res.send(rows);
+        })
+      })
+      
+  }else{
       var tablename=[name]
       mysqlConnection.query(`SELECT * from ${name}`,(err,rows,fields)=>{
         if (err){

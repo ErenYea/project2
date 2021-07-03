@@ -13,25 +13,44 @@ head
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js')
   body
     .container
-      h2 Add a New Entery to #{tablename}
+      if(cond=='add')
+        h2 Add a New Entery to #{tablename}
+      else
+        h2 EDIT THE Entery to #{tablename}
       |   
       form(action='/action' method="POST")
         input(type='text' name='tablename' value='#{tablename}' style='display:none;')
-        each val in data
-            .form-group
-            label(for='#{val.DATA_TYPE}') #{val.COLUMN_NAME}:
-            |  
-            if((val.IS_NULLABLE=='NO') && (val.DATA_TYPE=='int'))
-                input.form-control(type='number', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}' required)
-            else if(val.DATA_TYPE=='int')
-                input.form-control(type='number', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}')
-            else if(val.IS_NULLABLE=='NO')
-                input.form-control(type='#{val.DATA_TYPE}', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}' required)
-            else
-                input.form-control(type='#{val.DATA_TYPE}', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}')
-                 
-            
-            |  
+        if(cond=='add')
+            each val in data
+                .form-group
+                label(for='#{val.DATA_TYPE}') #{val.COLUMN_NAME}:
+                |  
+                if((val.IS_NULLABLE=='NO') && (val.DATA_TYPE=='int'))
+                    input.form-control(type='number', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}' required)
+                else if(val.DATA_TYPE=='int')
+                    input.form-control(type='number', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}')
+                else if(val.IS_NULLABLE=='NO')
+                    input.form-control(type='#{val.DATA_TYPE}', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}' required)
+                else
+                    input.form-control(type='#{val.DATA_TYPE}', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}')
+                    
+                
+                |  
+        else 
+            each val in data 
+                .form-group
+                label(for='#{val.DATA_TYPE}') #{val.COLUMN_NAME}:
+                |  
+                if((val.IS_NULLABLE=='NO') && (val.DATA_TYPE=='int'))
+                    input.form-control(type='number', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}' value="#{rows[0][val.COLUMN_NAME]}" required)
+                else if(val.DATA_TYPE=='int')
+                    input.form-control(type='number', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME} value="#{rows[0][val.COLUMN_NAME]}"')
+                else if(val.IS_NULLABLE=='NO')
+                    input.form-control(type='#{val.DATA_TYPE}', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}' value="#{rows[0][val.COLUMN_NAME]}" required)
+                else
+                    input.form-control(type='#{val.DATA_TYPE}', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}' value="#{rows[0][val.COLUMN_NAME]}")
+                    
+                
             
                
             

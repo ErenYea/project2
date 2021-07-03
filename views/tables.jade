@@ -215,15 +215,16 @@ head
 
                           -}else{
                               tbody
-                              
+                                input(type='text' id='tablename' name='tablename' value='#{tablenames[0]}' style='display:none;')
                                 each item in val
+                                  input(type="text" id="id" name="id" value="#{Object.keys(item)[0]}" style='display:none;')
                                   tr 
                                     each vals,key in item 
                                     
                                       td #{vals}        &#x9;
                                     td 
-                                      input.btn.btn-primary(type='submit' id='#{tablenames[i]}' name='#{tablenames[i]}' value='DELETE')
-                                      input.btn.btn-primary(type='submit' id='#{tablenames[i]}' name='#{tablenames[i]}' value='EDIT')
+                                      input.btn.btn-primary(type='submit' id='#{item[Object.keys(item)[0]]}' name='#{item[Object.keys(item)[0]]}' value='DELETE')
+                                      input.btn.btn-primary(type='submit' id='#{item[Object.keys(item)[0]]}' name='#{item[Object.keys(item)[0]]}' value='EDIT')
                                       
                           -}
                             
