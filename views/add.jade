@@ -21,6 +21,7 @@ head
       form(action='/action' method="POST")
         input(type='text' name='tablename' value='#{tablename}' style='display:none;')
         if(cond=='add')
+            input(type="text" name="task" value="add" style="display:none;")
             each val in data
                 .form-group
                 label(for='#{val.DATA_TYPE}') #{val.COLUMN_NAME}:
@@ -37,6 +38,8 @@ head
                 
                 |  
         else 
+            input(type="text" name="id" value="#{id}" style="display:none;")
+            input(type="text" name="task" value="edit" style="display:none;")
             each val in data 
                 .form-group
                 label(for='#{val.DATA_TYPE}') #{val.COLUMN_NAME}:

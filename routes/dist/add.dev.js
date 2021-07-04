@@ -57,11 +57,13 @@ router.post("/", function (req, res, next) {
       mysqlConnection.query("select * from ".concat(ob.tablename, " where ").concat(value[0], "=").concat(Object.keys(ob)[0]), function (err, rows, fields) {
         // console.log(`select * from ${ob.tablename} where ${value[0]}=${Object.keys(ob)[0]}`)
         console.log(rows);
+        id = [value[0], Object.keys(ob)[0]];
         res.render("add", {
           data: main,
           rows: rows,
           tablename: ob.tablename,
-          cond: 'edit'
+          cond: 'edit',
+          id: id
         }); // res.send(rows);
       });
     });
