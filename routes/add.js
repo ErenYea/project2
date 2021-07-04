@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+// const confirm = require('confirm-dialog');
 const mysqlConnection = require("./mysqlconn.js");
 
 
@@ -8,7 +9,7 @@ router.post("/", function (req, res,next) {
   var ob = req.body
   // var id = req.params;
   // console.log(id)
-  // console.log(ob)
+  console.log(ob)
   var name;
   var value;
   if(Object.getOwnPropertyNames(ob).length == 1){
@@ -54,6 +55,14 @@ router.post("/", function (req, res,next) {
         })
       })
       
+  } else if(ob[Object.keys(ob)[0]]=='DELETE'){
+      mysqlConnection.query(`delete from ${ob.tablename} where ${ob.id[0]}=${Object.keys(ob)[0]}`,(err,rows,fields)=>{
+        if(err){
+          res.send(err)
+        }else{
+          res.redirect('/tables')
+        }
+      })
   }else{
       var tablename=[name]
       mysqlConnection.query(`SELECT * from ${name}`,(err,rows,fields)=>{

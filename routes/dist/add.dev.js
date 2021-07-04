@@ -2,7 +2,7 @@
 
 var express = require("express");
 
-var router = express.Router();
+var router = express.Router(); // const confirm = require('confirm-dialog');
 
 var mysqlConnection = require("./mysqlconn.js");
 
@@ -10,8 +10,8 @@ router.post("/", function (req, res, next) {
   // console.log("added")
   var ob = req.body; // var id = req.params;
   // console.log(id)
-  // console.log(ob)
 
+  console.log(ob);
   var name;
   var value;
 
@@ -57,6 +57,14 @@ router.post("/", function (req, res, next) {
           id: id
         }); // res.send(rows);
       });
+    });
+  } else if (ob[Object.keys(ob)[0]] == 'DELETE') {
+    mysqlConnection.query("delete from ".concat(ob.tablename, " where ").concat(ob.id[0], "=").concat(Object.keys(ob)[0]), function (err, rows, fields) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.redirect('/tables');
+      }
     });
   } else {
     var tablename = [name];

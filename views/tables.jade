@@ -30,6 +30,7 @@ head
     
 
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+    script(src="/javascripts/mine.js") 
 
   body
     .wrapper
@@ -223,7 +224,7 @@ head
                                     
                                       td #{vals}        &#x9;
                                     td 
-                                      input.btn.btn-primary(type='submit' id='#{item[Object.keys(item)[0]]}' name='#{item[Object.keys(item)[0]]}' value='DELETE')
+                                      input.btn.btn-primary(type='submit' id='delete' name='#{item[Object.keys(item)[0]]}' value='DELETE')
                                       input.btn.btn-primary(type='submit' id='#{item[Object.keys(item)[0]]}' name='#{item[Object.keys(item)[0]]}' value='EDIT')
                                       
                           -}
@@ -261,6 +262,8 @@ head
               |  
               a(href='/') Creative Tim
               | , made with love for a better web
+
+    
   // Core JS Files
 script(src='/javascripts/jquery.3.2.1.min.js', type='text/javascript')
   | &#x9;
@@ -275,4 +278,4 @@ script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?key=
 script(src='/javascripts/light-bootstrap-dashboard.js?v=1.4.0')
   // Light Bootstrap Table DEMO methods, don't include it in your project!
 script(src='/javascripts/demo.js')
-script(src="/javascripts/mine.js") 
+

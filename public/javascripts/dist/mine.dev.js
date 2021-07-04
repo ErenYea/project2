@@ -1,10 +1,6 @@
 "use strict";
 
-var _this = void 0;
-
-$("button").click(function () {
-  console.log("hamza");
-  var attribut = $(_this).attr('value');
-  console.log(attribut);
+$('#delete').click(function () {
+  alert('You are deleting an entry');
 });
 //# sourceMappingURL=mine.dev.js.map
