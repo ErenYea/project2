@@ -56,7 +56,7 @@ router.get("/", function (req, res, next) {
     // console.log(array_of_table);
     for (element of array_of_table){
       for (key in element){
-        console.log(element[key]);
+        // console.log(element[key]);
         tablenames.push(element[key]);
         var object_of_data = await getcolumndata(element,key);
         data.push(object_of_data);
