@@ -4,22 +4,8 @@ var express = require("express");
 
 var router = express.Router();
 
-var mysql = require("mysql");
+var mysqlConnection = require("./mysqlconn.js");
 
-var mysqlConnection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "loveisone",
-  database: "helloworld",
-  multipleStatements: true
-});
-mysqlConnection.connect(function (err) {
-  if (err) {
-    console.log("Not seccess", err);
-  } else {
-    console.log("sucess");
-  }
-});
 router.post("/", function (req, res, next) {
   var data = req.body;
   var arr = [];
@@ -50,9 +36,9 @@ router.post("/", function (req, res, next) {
   }
 
   var tablename = arr.shift();
-  array_of_column_name.shift();
-  console.log(arr);
-  console.log(array_of_column_name); // arr.reverse();
+  array_of_column_name.shift(); // console.log(arr)
+  // console.log(array_of_column_name)
+  // arr.reverse();
 
   var huz = "'" + arr.join("','") + "'";
   var ham = "" + array_of_column_name.join(",") + "";

@@ -1,21 +1,7 @@
 var express = require("express");
 var router = express.Router();
-const mysql = require("mysql");
+const mysqlConnection = require("./mysqlconn.js");
 
-var mysqlConnection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "loveisone",
-  database: "helloworld",
-  multipleStatements: true,
-});
-mysqlConnection.connect((err) => {
-  if (err) {
-    console.log("Not seccess", err);
-  } else {
-    console.log("sucess");
-  }
-});
 
 
 

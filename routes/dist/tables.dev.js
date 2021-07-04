@@ -4,23 +4,9 @@ var express = require("express");
 
 var router = express.Router();
 
-var mysql = require("mysql");
-
-var mysqlConnection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "loveisone",
-  database: "helloworld",
-  multipleStatements: true
-});
-mysqlConnection.connect(function (err) {
-  if (err) {
-    console.log("Not seccess", err);
-  } else {
-    console.log("sucess");
-  }
-});
+var mysqlConnection = require("./mysqlconn.js");
 /* GET users listing. */
+
 
 router.get("/", function (req, res, next) {
   var gettablenames = function gettablenames() {
