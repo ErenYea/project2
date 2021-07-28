@@ -23,6 +23,8 @@ var add = require("./routes/add");
 
 var action = require("./routes/action");
 
+var login = require("./routes/login");
+
 var app = express(); // view engine setup
 
 app.set("views", path.join(__dirname, "views"));
@@ -39,7 +41,8 @@ app.use("/", indexRouter); // app.use("/users", usersRouter);
 
 app.use("/tables", dashboardrouter);
 app.use("/add", add);
-app.use("/action", action); // catch 404 and forward to error handler
+app.use("/action", action);
+app.use("/login", login); // catch 404 and forward to error handler
 
 app.use(function (req, res, next) {
   next(createError(404));

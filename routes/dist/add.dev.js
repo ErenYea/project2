@@ -1,5 +1,7 @@
 "use strict";
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 var express = require("express");
 
 var router = express.Router(); // const confirm = require('confirm-dialog');
@@ -28,14 +30,20 @@ router.post("/", function (req, res, next) {
 
 
   if (value == "ADD") {
-    // console.log('hello')
+    console.log('hello');
     mysqlConnection.query("select COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH,  \n       IS_NULLABLE \n    from INFORMATION_SCHEMA.COLUMNS\n    where TABLE_NAME='".concat(name, "'"), function (err, rows, fields) {
       if (err) {
         res.send(err);
       } else {
-        // console.log(rows)
+        if (Object.keys(ob)[0] == "users") {
+          var main = rows.slice(0, 2);
+        } else {
+          var main = rows;
+        }
+
+        console.log(main);
         res.render("add", {
-          data: rows,
+          data: main,
           tablename: name,
           cond: 'add'
         }); // res.send(rows)
@@ -43,12 +51,24 @@ router.post("/", function (req, res, next) {
     });
   } else if (ob[Object.keys(ob)[0]] == 'EDIT') {
     mysqlConnection.query("select COLUMN_NAME,DATA_TYPE,CHARACTER_MAXIMUM_LENGTH,IS_NULLABLE\n      from INFORMATION_SCHEMA.COLUMNS\n      where TABLE_NAME='".concat(ob.tablename, "'"), function (err, rows, fields) {
-      var main = rows; // console.log(rows)
+      if (err) {
+        res.send(err);
+      }
 
-      mysqlConnection.query("select * from ".concat(ob.tablename, " where ").concat(ob.id[0], "=").concat(Object.keys(ob)[0]), function (err, rows, fields) {
-        // console.log(`select * from ${ob.tablename} where ${value[0]}=${Object.keys(ob)[0]}`)
-        // console.log(rows)
+      var main = rows;
+      console.log(rows);
+
+      if (_typeof(ob.id) == _typeof([])) {
+        var condition = ob.id[0];
         id = [ob.id[0], Object.keys(ob)[0]];
+      } else {
+        var condition = ob.id;
+        id = [ob.id, Object.keys(ob)[0]];
+      }
+
+      mysqlConnection.query("select * from ".concat(ob.tablename, " where ").concat(condition, "=").concat(Object.keys(ob)[0]), function (err, rows, fields) {
+        console.log("select * from ".concat(ob.tablename, " where ").concat(value[0], "=").concat(Object.keys(ob)[0])); // console.log(rows)
+
         res.render("add", {
           data: main,
           rows: rows,

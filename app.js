@@ -12,6 +12,7 @@ var indexRouter = require("./routes/index");
 var dashboardrouter = require("./routes/tables");
 var add = require("./routes/add");
 var action = require("./routes/action");
+var login = require("./routes/login")
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use("/", indexRouter);
 app.use("/tables", dashboardrouter);
 app.use("/add", add);
 app.use("/action", action);
+app.use("/login",login);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

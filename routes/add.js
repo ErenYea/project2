@@ -26,7 +26,7 @@ router.post("/", function (req, res,next) {
   // console.log(name)
   // console.log(value)
   if(value=="ADD"){
-    // console.log('hello')
+    console.log('hello')
     mysqlConnection.query(`select COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH,  
        IS_NULLABLE 
     from INFORMATION_SCHEMA.COLUMNS
@@ -35,21 +35,39 @@ router.post("/", function (req, res,next) {
       if(err){
         res.send(err)
       }else{
-        // console.log(rows)
-        res.render("add",{data:rows,tablename:name,cond:'add'});
+        if(Object.keys(ob)[0]=="users"){
+          var main=rows.slice(0,2);
+        }else{
+          var main=rows;
+        }
+        console.log(main)
+        res.render("add",{data:main,tablename:name,cond:'add'});
         // res.send(rows)
       }
     });
   } else if(ob[Object.keys(ob)[0]]=='EDIT'){
+      
       mysqlConnection.query(`select COLUMN_NAME,DATA_TYPE,CHARACTER_MAXIMUM_LENGTH,IS_NULLABLE
       from INFORMATION_SCHEMA.COLUMNS
       where TABLE_NAME='${ob.tablename}'`,(err,rows,fields)=>{
+        if(err){
+          res.send(err)
+        }
+        
         var main=rows;
-        // console.log(rows)
-        mysqlConnection.query(`select * from ${ob.tablename} where ${ob.id[0]}=${Object.keys(ob)[0]}`,(err,rows,fields)=>{
-          // console.log(`select * from ${ob.tablename} where ${value[0]}=${Object.keys(ob)[0]}`)
-          // console.log(rows)
+        
+        console.log(rows)
+        if(typeof(ob.id)==typeof([])){
+          var condition =  ob.id[0];
           id = [ob.id[0],Object.keys(ob)[0]]
+        }else{
+          var condition = ob.id;
+          id = [ob.id,Object.keys(ob)[0]]
+        }
+        mysqlConnection.query(`select * from ${ob.tablename} where ${condition}=${Object.keys(ob)[0]}`,(err,rows,fields)=>{
+          console.log(`select * from ${ob.tablename} where ${value[0]}=${Object.keys(ob)[0]}`)
+          // console.log(rows)
+          
           res.render("add",{data:main,rows:rows,tablename:ob.tablename,cond:'edit',id:id})
           // res.send(rows);
         })

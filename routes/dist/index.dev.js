@@ -9,7 +9,7 @@ var mysqlConnection = require('./mysqlconn');
 
 
 router.get("/", function (req, res, next) {
-  res.render("index", {
+  res.render("login", {
     title: "Express"
   });
 });

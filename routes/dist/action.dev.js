@@ -36,9 +36,9 @@ router.post("/", function (req, res, next) {
   }
 
   var tablename = arr.shift();
-  array_of_column_name.shift(); // console.log(arr)
-  // console.log(array_of_column_name)
-  // arr.reverse();
+  array_of_column_name.shift();
+  console.log(arr);
+  console.log(array_of_column_name); // arr.reverse();
 
   var huz = "'" + arr.join("','") + "'";
   var ham = "" + array_of_column_name.join(",") + "";
@@ -53,6 +53,7 @@ router.post("/", function (req, res, next) {
     });
   } else if (task == 'edit') {
     value = arr.shift();
+    console.log(value);
     arr_value = value.split(",");
     array_of_column_name.shift();
     var update = "";
