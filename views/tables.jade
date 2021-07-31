@@ -1,0 +1,282 @@
+doctype html(lang='en')
+head
+  meta(charset='utf-8')
+  | &#x9;
+  link(rel='icon' type='image/png' href='/images/favicon.ico')
+  | &#x9;
+  meta(http-equiv='X-UA-Compatible' content='IE=edge,chrome=1')
+  | &#x9;
+  title Light Bootstrap Dashboard by Creative Tim
+  | &#x9;
+  meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport')
+  |     
+  meta(name='viewport' content='width=device-width')
+  // Bootstrap core CSS
+  link(href='/stylesheets/bootstrap.min.css' rel='stylesheet')
+  // Animation library for notifications
+  link(href='/stylesheets/animate.min.css' rel='stylesheet')
+  // Light Bootstrap Table core CSS
+  link(href='/stylesheets/light-bootstrap-dashboard.css?v=1.4.0' rel='stylesheet')
+  // CSS for Demo Purpose, don't include it in your project
+  link(href='/stylesheets/demo.css' rel='stylesheet')
+  // Fonts and icons
+  link(href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' rel='stylesheet')
+  |     
+  link(href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css')
+  |     
+  link(href='/stylesheets/pe-icon-7-stroke.css' rel='stylesheet')
+  link(rel='canonical' href='https://getbootstrap.com/docs/4.0/components/buttons/')
+  link(rel="stylesheet" href="/stylesheets/style.css")
+
+
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+  script(src="/javascripts/mine.js") 
+
+body
+  .wrapper
+    .sidebar(data-color='purple' data-image='/images/sidebar-5.jpg')
+      // you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+      .sidebar-wrapper
+        .logo
+          a.simple-text(href='http://www.creative-tim.com')
+            | Creative Tim
+        |             
+        ul.nav
+          li
+            a(href='/')
+              |                         
+              p Dashboard
+          |                 
+          li
+            a(href='/user')
+
+              |                         
+              p User Profile
+          |                 
+          li.active
+            a(href='/tables')
+
+              |                         
+              p Table List
+          |                 
+          li
+            a(href='/typography')
+
+              |                         
+              p Typography
+          |                 
+
+          |                 
+          li
+            a(href='notifications.html')
+
+              |                         
+              p Notifications
+          | &#x9;&#x9;&#x9;&#x9;
+
+    |     
+    .main-panel
+      nav.navbar.navbar-default.navbar-fixed
+        .container-fluid
+          .navbar-header
+            button.navbar-toggle(type='button' data-toggle='collapse' data-target='#navigation-example-2')
+              span.sr-only Toggle navigation
+              |                         
+              span.icon-bar
+              |                         
+              span.icon-bar
+              |                         
+              span.icon-bar
+            |                     
+            a.navbar-brand(href='#') Table List
+          |                 
+          .collapse.navbar-collapse
+            ul.nav.navbar-nav.navbar-left
+              li
+                a.dropdown-toggle(href='#' data-toggle='dropdown')
+                  i.fa.fa-dashboard
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  p.hidden-lg.hidden-md Dashboard
+              |                         
+              li.dropdown
+                a.dropdown-toggle(href='#' data-toggle='dropdown')
+                  i.fa.fa-globe
+                  |                                     
+                  b.caret.hidden-sm.hidden-xs
+                  |                                     
+                  span.notification.hidden-sm.hidden-xs 5
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  p.hidden-lg.hidden-md
+                    | 5 Notifications
+                    b.caret
+                |                               
+                ul.dropdown-menu
+                  li
+                    a(href='#') Notification 1
+                  |                                 
+                  li
+                    a(href='#') Notification 2
+                  |                                 
+                  li
+                    a(href='#') Notification 3
+                  |                                 
+                  li
+                    a(href='#') Notification 4
+                  |                                 
+                  li
+                    a(href='#') Another notification
+              |                         
+              li
+                a(href='')
+                  i.fa.fa-search
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  p.hidden-lg.hidden-md Search
+            |                     
+            ul.nav.navbar-nav.navbar-right
+              li
+                a(href='')
+                  p Account
+              |                         
+              li.dropdown
+                a.dropdown-toggle(href='#' data-toggle='dropdown')
+                  p
+                    | Dropdown
+                    b.caret
+                |                               
+                ul.dropdown-menu
+                  li
+                    a(href='#') Action
+                  |                                 
+                  li
+                    a(href='#') Another action
+                  |                                 
+                  li
+                    a(href='#') Something
+                  |                                 
+                  li
+                    a(href='#') Another action
+                  |                                 
+                  li
+                    a(href='#') Something
+                  |                                 
+                  li.divider
+                  |                                 
+                  li
+                    a(href='#') Separated link
+              |                         
+              li
+                a(href='/logout')
+                  p Log out
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li.separator.hidden-lg.hidden-md
+      |         
+      .content
+        - i=0
+        form(method="POST" action="/add")
+          each val in data
+            .container-fluid
+              .row
+                .col-md-12
+                  .card
+                    .header
+
+                      h4.title #{tablenames[i]}
+                        -if(cond == 'table'){
+                          <input class="btn btn-primary gg" type="submit" id="#{tablenames[i]}" name="#{tablenames[i]}" value="VIEW">
+                          <input class="btn btn-primary" type="submit" id="#{tablenames[i]}" name="#{tablenames[i]}" value="ADD">
+                        -} else{
+                          <input class="btn btn-primary" type="submit" id="#{tablenames[i]}" name="#{tablenames[i]}" value="ADD">
+                          .search-container
+                              select.form-select(aria-label='Default select example',id="selectbox",placeholder="search",name='selectbox')
+                                option(selected='') Search By
+                                  |   
+                                  
+
+                              input(type='text', placeholder='Search..', name='search',class="hamza",id="search")
+                              |       
+                              button(type='submit',class="btn btn-primary",id="btnsearch")
+                                i.fa.fa-search
+                          
+                        -}
+
+                      - i +=1
+                      |                                 
+                      p.category Here is a subtitle for this table
+                    |                             
+                    .content.table-responsive.table-full-width
+                      table.table.table-hover.table-striped.table-bordered
+                        thead
+                          each vals,key in val[0]
+                            th.rw #{key}         &#x9;    
+
+                        -if( cond =='table'){
+                          tbody
+                            - p = 0
+                            each item in val
+                              -p+=1
+                              -if(p === 5){
+                                - break;
+                              -}
+                              tr 
+                                each vals,key in item 
+
+                                  td #{vals}        &#x9;
+
+                        -}else{
+                          tbody
+                            input(type='text' id='tablename' name='tablename' value='#{tablenames[0]}' style='display:none;')
+                            each item in val
+                              input(type="text" id="id" name="id" value="#{Object.keys(item)[0]}" style='display:none;')
+                              tr 
+                                each vals,key in item 
+
+                                  td #{vals}        &#x9;
+                                td 
+                                  input.btn.btn-primary.gg(type='submit' id='delete' name='#{item[Object.keys(item)[0]]}' value='DELETE')
+                                  input.btn.btn-primary(type='submit' id='#{item[Object.keys(item)[0]]}' name='#{item[Object.keys(item)[0]]}' value='EDIT')
+                        -}                                                                   
+      |         
+      footer.footer
+        .container-fluid
+          nav.pull-left
+            ul
+              li
+                a(href='#')
+                  | Home
+              |                         
+              li
+                a(href='#')
+                  | Company
+              |                         
+              li
+                a(href='#')
+                  | Portfolio
+              |                         
+              li
+                a(href='#')
+                  | Blog
+          |                 
+          p.copyright.pull-right
+            | &copy; 
+            script.
+              document.write(new Date().getFullYear())
+            |  
+            a(href='/') Creative Tim
+            | , made with love for a better web
+
+
+// Core JS Files
+script(src='/javascripts/jquery.3.2.1.min.js' type='text/javascript')
+  | &#x9;
+script(src='/javascripts/bootstrap.min.js' type='text/javascript')
+  // Charts Plugin
+script(src='/javascripts/chartist.min.js')
+  // Notifications Plugin
+script(src='/javascripts/bootstrap-notify.js')
+  // Google Maps Plugin
+script(type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE')
+  // Light Bootstrap Table Core javascript and methods for Demo purpose
+script(src='/javascripts/light-bootstrap-dashboard.js?v=1.4.0')
+  // Light Bootstrap Table DEMO methods, don't include it in your project!
+script(src='/javascripts/mine.js')
+
